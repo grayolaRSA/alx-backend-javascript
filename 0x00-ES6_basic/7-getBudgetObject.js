@@ -1,1 +1,1 @@
-export default ((income, gdp, capita) => ({income, gdp, capita}));
+export default ((income, gdp, capita) => ({ income, gdp, capita }));
