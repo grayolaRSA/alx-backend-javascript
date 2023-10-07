@@ -1,9 +1,9 @@
-export default function setFromArray (Array) {
-const mySet = new Set();
+export default function setFromArray(Array) {
+  const mySet = new Set();
 
-for (const element of Array) {
+  for (const element of Array) {
     mySet.add(element);
-};
+  }
 
-return mySet;
+  return mySet;
 }
