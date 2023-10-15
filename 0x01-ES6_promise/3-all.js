@@ -10,6 +10,7 @@ export default function handleProfileSignup() {
       console.log(`${photo.body} ${User.firstName} ${User.lastName}`);
     })
     .catch(() => {
-      Error('Signup system offline');
+      const err = 'Signup system offline';
+      console.error(err);
     });
 }
