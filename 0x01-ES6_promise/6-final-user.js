@@ -7,6 +7,8 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
 
   return Promise.allSettled([userSignUp, userPhoto])
     .then((result) => {
-      console.log(result.status);
+        result.forEach((result) => {
+            console.log([result.status, result.values]);
+        });
     });
 }
