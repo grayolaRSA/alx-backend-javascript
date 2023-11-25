@@ -24,16 +24,25 @@ const id = '';
     });
   });
 
-  it('GET /cart/:id returns correct response index page', (done) => {
-    if (typeof id === 'number') {
-      request.get(`${baseUrl}/cart/${id}`, (_err, res, body) => {
+  it('GET /cart/:id returns correct response for valid ID', (done) => {
+      request.get(`${baseUrl}/cart/25`, (_err, res, body) => {
         expect(res.statusCode).to.be.equal(200);
+        expect(body).to.be.equal('Payment methods for cart 25');
+        done();
       });
-    } else {
-      request.get(`${baseUrl}/cart/${id}`, (_err, res, body) => {
-        expect(res.statusCode).to.be.equal(404);
-      });
-    }
-    done();
+  });
+
+  it('GET /cart/:id returns 404 response for invalid id: -ve number', (done) => {
+    request.get(`${baseUrl}/cart/-32`, (_err, res, body) => {
+      expect(res.statusCode).to.be.equal(404);
+      done();
+    });
+  });
+
+  it('GET /cart/:id returns 404 response for invalid id: text', (done) => {
+    request.get(`${baseUrl}/cart/toto`, (_err, res, body) => {
+      expect(res.statusCode).to.be.equal(404);
+      done();
+    });
   });
 });
