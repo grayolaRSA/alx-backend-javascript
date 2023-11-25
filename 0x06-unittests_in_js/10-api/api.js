@@ -25,7 +25,7 @@ app.get('/', (_, res) => {
 
   });
 
-  app.post('/login', (req, res) => {
+  app.post('/login', function (req, res) {
     let username = '';
   
     if (req.body) {
