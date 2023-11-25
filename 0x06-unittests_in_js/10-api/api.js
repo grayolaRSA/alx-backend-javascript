@@ -2,6 +2,7 @@ const express = require('express');
 
 const app = express();
 app.use(express.json());
+
 const PORT = 7865;
 
 app.get('/', (_, res) => {
@@ -25,7 +26,7 @@ app.get('/', (_, res) => {
 
   });
 
-  app.post('/login', function (req, res) {
+  app.post('/login', (req, res) => {
     let username = '';
   
     if (req.body) {
