@@ -18,15 +18,8 @@ describe('calculateNumber', () => {
   });
 
   it('should throw error for zero division result', () => {
-    try {
-      calculateNumber('DIVIDE', 1.4, 0);
-      // If no error is thrown, fail the test
-      expect.fail('Expected function to throw an error');
-    } catch (error) {
-      // Assert that the caught error is the expected error
-      const errorFunction = () => calculateNumber('DIVIDE', 1.4, 0);
-      expect(errorFunction).to.throw(Error);
-    }
+      const errorFunction = calculateNumber('DIVIDE', 1.4, 0);
+      expect(errorFunction).to.be.a('string').and.to.equal('Error');
   });
 
 //   it('should have at least four assertions', () => {
