@@ -47,8 +47,9 @@ const id = '';
   });
 
   it('login operation is successful', (done) => {
-    request.post(`${baseUrl}/login`, (_err, res, body) => {
+    request.post(`${baseUrl}/login`, {json: {userName: 'Brook'}}, (_err, res, body) => {
       expect(res.statusCode).to.be.equal(200);
+      expect(body).to.be.equal('Welcome Brook');
       done();
     });
   });
@@ -56,7 +57,7 @@ const id = '';
   it('available payments operation returns correct data', (done) => {
     request.get(`${baseUrl}/available_payments`, (_err, res, body) => {
       expect(res.statusCode).to.be.equal(200);
-
+   
       const payObj = {
         payment_methods: {
           credit_cards: true,
