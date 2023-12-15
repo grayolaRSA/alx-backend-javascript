@@ -19,21 +19,19 @@ res.send(courses);
 
 app.get('/api/courses/:id', (req, res) => {
 const course = courses.find(c => c.id === parseInt(req.params.id));
-if (!course) res.status(404).send('The course with given ID wasnt found');
+if (!course) return res.status(404).send('The course with given ID wasnt found');
 res.send(course);
 });
 
 app.post('/api/courses', (req, res) => {
-    const schema = {
-name: Joi.string().min(3).required()
-    };
+    const schema = Joi.object({
+    name: Joi.string().min(3).required()
+    });
 
-    const result = Joi.ValidationError(req.body, schema);
-    console.log(result);
+    const { error } = schema.validate(req.body);
+    // console.log(result);
 
-    if (result.error) {
-        res.status(400).send(result.error.details[0].message);
-    } 
+    if (error) return res.status(400).send(error.details[0].message);
 
 const course = {
 id: courses.length + 1,
@@ -43,31 +41,40 @@ courses.push(course);
 res.send(course);
 });
 
-app.put('/api/courses/id', (req, res) => {
+app.put('/api/courses/:id', (req, res) => {
+    //Lookup the course
     const course = courses.find(c => c.id === parseInt(req.params.id));
+    //if not existing return 404 error
     if (!course) return res.status(404).send('The course with given ID wasnt found');
 
-    const schema = {
+    const schema = Joi.object({
         name: Joi.string().min(3).required()
-            };
-        
-    const result = Joi.ValidationError(req.body, schema);
-    if (result.error) {
-                res.status(400).send(result.error.details[0].message);
-                return;
-            } 
+        });
+    
+    //validate the course   
+    const { error } = schema.validate(req.body);
+    
+    //if invalid return 400 error
+    if (error) return res.status(400).send(error.details[0].message);
 
+    //Update the course
     course.name = req.body.name;
+    //return the updated course
     res.send(course);
 
 });
 
 app.delete('/api/courses/:id', (req, res) => {
+    //Lookup the course
     const course = courses.find(c => c.id === parseInt(req.params.id));
-    if (!course) res.status(404).send('The course with given ID wasnt found');
+    //if not existing return 404 error
+    if (!course) return res.status(404).send('The course with given ID wasnt found');
 
+    //Delete the course
     const index = courses.indexOf(course);
     courses.splice(index, 1);
+
+    res.send(course);
 });
 
 // PORT
