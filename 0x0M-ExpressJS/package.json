@@ -1,0 +1,19 @@
+{
+  "name": "0x0m-expressjs",
+  "version": "1.0.0",
+  "description": "This is a readme file to test out the express server as per the tutoria from Programming with Mosh on 'How to build a REST API with NodeJS and Express'",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "joi": "^17.11.0",
+    "mongoose": "^8.0.3",
+    "nodemon": "^3.0.2"
+  }
+}
